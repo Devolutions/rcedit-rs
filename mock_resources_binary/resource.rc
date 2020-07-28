@@ -1,0 +1,11 @@
+#include "resource.h"
+
+IDI_ICON_MAIN	ICON	"mock_icon.ico"
+IDR_MOCK_DATA	RCDATA	{ 42 }
+
+STRINGTABLE
+{
+	IDS_MOCK_TEXT "1"
+}
+
+
