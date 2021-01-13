@@ -16,7 +16,7 @@ fn main() {
     Build::new()
         .cpp(true)
         .static_crt(true)
-        .flag("-std=c++11")
+        .flag_if_supported("-std=c++11")
         .files(SOURCE_FILES.iter().map(|name| format!("{}/{}", current_dir, name)))
         .compile("rcedit");
 }
