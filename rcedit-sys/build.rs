@@ -14,7 +14,9 @@ fn main() {
     let current_dir = std::env::var("CARGO_MANIFEST_DIR").unwrap();
 
     Build::new()
+        .cpp(true)
         .static_crt(true)
+        .flag_if_supported("-std=c++11")
         .files(SOURCE_FILES.iter().map(|name| format!("{}/{}", current_dir, name)))
         .compile("rcedit");
 }

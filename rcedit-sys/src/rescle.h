@@ -20,7 +20,58 @@
 #include <vector>
 #include <map>
 
+#ifdef _WIN32
 #include <windows.h>
+#else
+
+typedef uint8_t BYTE;
+typedef uint16_t WORD, DWORD;
+typedef uint32_t UINT;
+typedef int32_t BOOL;
+
+#define CALLBACK
+
+typedef intptr_t LONG_PTR, *PLONG_PTR;
+typedef uintptr_t ULONG_PTR, *PULONG_PTR;
+typedef void* HANDLE, *PHANDLE, *LPHANDLE;
+typedef HANDLE HMODULE;
+typedef HANDLE HGLOBAL;
+typedef HANDLE HRSRC;
+typedef WORD LANGID;
+
+typedef uint16_t WCHAR;
+typedef WCHAR *LPWSTR;
+typedef WCHAR *PWSTR;
+typedef const WCHAR* *LPCWSTR, *PCWSTR;
+
+#define MAKEINTRESOURCEW(i) ((LPWSTR)((ULONG_PTR)((WORD)(i))))
+#define RT_VERSION MAKEINTRESOURCEW(16)
+
+typedef struct tagVS_FIXEDFILEINFO {
+  DWORD dwSignature;
+  DWORD dwStrucVersion;
+  DWORD dwFileVersionMS;
+  DWORD dwFileVersionLS;
+  DWORD dwProductVersionMS;
+  DWORD dwProductVersionLS;
+  DWORD dwFileFlagsMask;
+  DWORD dwFileFlags;
+  DWORD dwFileOS;
+  DWORD dwFileType;
+  DWORD dwFileSubtype;
+  DWORD dwFileDateMS;
+  DWORD dwFileDateLS;
+} VS_FIXEDFILEINFO;
+
+#define VFT_APP         0x00000001L
+#define VFT_DLL         0x00000002L
+#define VFT_DRV         0x00000003L
+#define VFT_FONT        0x00000004L
+#define VFT_STATIC_LIB  0x00000007L
+#define VFT_UNKNOWN     0x00000000L
+#define VFT_VXD         0x00000005L
+#endif
+
 #include <memory> // unique_ptr
 
 #define RU_VS_COMMENTS          L"Comments"
