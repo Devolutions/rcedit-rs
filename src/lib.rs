@@ -54,6 +54,47 @@ impl ResourceUpdater {
         }
     }
 
+    pub fn set_version_string(&mut self, name: &str, value: &str) -> RceditResult<()> {
+        let cstr_name = utf8_to_wide_string(name)?;
+        let cstr_value = utf8_to_wide_string(value)?;
+        if unsafe {
+            sys::ResourceUpdater_SetVersionString(
+                self.handle,
+                cstr_name.as_ptr(),
+                cstr_value.as_ptr(),
+            )
+        } {
+            Ok(())
+        } else {
+            Err(RceditError::ResourceUpdateFailure)
+        }
+    }
+
+    pub fn set_file_version(&mut self, v1: u16, v2: u16, v3: u16, v4: u16) -> RceditResult<()> {
+        if unsafe { sys::ResourceUpdater_SetFileVersion(self.handle, v1, v2, v3, v4) } {
+            Ok(())
+        } else {
+            Err(RceditError::ResourceUpdateFailure)
+        }
+    }
+
+    pub fn set_product_version(&mut self, v1: u16, v2: u16, v3: u16, v4: u16) -> RceditResult<()> {
+        if unsafe { sys::ResourceUpdater_SetProductVersion(self.handle, v1, v2, v3, v4) } {
+            Ok(())
+        } else {
+            Err(RceditError::ResourceUpdateFailure)
+        }
+    }
+
+    pub fn set_execution_level(&mut self, level: &str) -> RceditResult<()> {
+        let cstr = utf8_to_wide_string(level)?;
+        if unsafe { sys::ResourceUpdater_SetExecutionLevel(self.handle, cstr.as_ptr()) } {
+            Ok(())
+        } else {
+            Err(RceditError::ResourceUpdateFailure)
+        }
+    }
+
     pub fn set_string(&mut self, string_id: u32, data: &str) -> RceditResult<()> {
         let cstr = utf8_to_wide_string(data)?;
         if unsafe { sys::ResourceUpdater_ChangeString(self.handle, string_id, cstr.as_ptr()) } {

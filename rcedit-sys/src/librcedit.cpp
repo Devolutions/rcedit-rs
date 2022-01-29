@@ -35,6 +35,30 @@ extern "C"
         return resourceUpdater->SetIcon(wIconPath);
     }
 
+    bool ResourceUpdater_SetVersionString(ResourceUpdater* ctx, const wchar_t* wName, const wchar_t* wValue)
+    {
+        auto resourceUpdater = reinterpret_cast<rescle::ResourceUpdater*>(ctx);
+        return resourceUpdater->SetVersionString(wName, wValue);
+    }
+
+    bool ResourceUpdater_SetProductVersion(ResourceUpdater* ctx, unsigned short v1, unsigned short v2, unsigned short v3, unsigned short v4)
+    {
+        auto resourceUpdater = reinterpret_cast<rescle::ResourceUpdater*>(ctx);
+        return resourceUpdater->SetProductVersion(v1, v2, v3, v4);
+    }
+
+    bool ResourceUpdater_SetFileVersion(ResourceUpdater* ctx, unsigned short v1, unsigned short v2, unsigned short v3, unsigned short v4)
+    {
+        auto resourceUpdater = reinterpret_cast<rescle::ResourceUpdater*>(ctx);
+        return resourceUpdater->SetFileVersion(v1, v2, v3, v4);
+    }
+
+    bool ResourceUpdater_SetExecutionLevel(ResourceUpdater* ctx, const wchar_t* wLevel)
+    {
+        auto resourceUpdater = reinterpret_cast<rescle::ResourceUpdater*>(ctx);
+        return resourceUpdater->SetExecutionLevel(wLevel);
+    }    
+
     bool ResourceUpdater_ChangeRcdata(ResourceUpdater* ctx, uint32_t id, const wchar_t* wRcdataPath)
     {
         auto resourceUpdater = reinterpret_cast<rescle::ResourceUpdater*>(ctx);
